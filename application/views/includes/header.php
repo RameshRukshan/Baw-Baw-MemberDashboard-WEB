@@ -2,11 +2,11 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
           <i class="hamburger align-self-center"></i>
         </a>
-
+        	
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item dropdown">
-							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+							<a class="nav-icon dropdown-toggle" href="" id="alertsDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
 									<i class="align-middle" data-feather="bell"></i>
 									<span class="indicator">
@@ -43,12 +43,21 @@
 
 									foreach ($new_notification as $new_n) { ?>
 
-									<a href="#" class="list-group-item">
-										<div class="row g-0 align-items-center">
+									<a href="<?php echo base_url(); ?>notifications" class="list-group-item">
+										<div class="row g-0 align-items-center" >
 											<div class="col-2">
 												<img src="<?php echo base_url(); ?>assets/img/icons/noti-icon.png">
 											</div>
-											<div class="col-10">
+											<div class="col-10" onclick="
+
+										<?php 
+											$this->db->set('status', 0);
+        									$id = $new_n->id;
+        									$this->db->where('id',$id);
+        									$this->db->update('notification'); 
+        								?>
+
+        								">
 												<div class="text-dark"><?php echo $new_n->title; ?></div>
 												<div class="text-muted small mt-1"><?php echo $new_n->short_desccription; ?></div>
 											</div>
