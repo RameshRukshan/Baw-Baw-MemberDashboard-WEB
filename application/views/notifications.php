@@ -20,43 +20,39 @@
 					</div>
 					<div class="row">
 
-						<div class="col-12 col-md-6">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Card with links</h5>
-								</div>
-								<div class="card-body">
-									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">Animal Location</a>
-									<a href="#" class="card-link">Medical Center Locat</a>
-								</div>
-							</div>
-						</div>
+						<?php
+							$id = $this->session->userData('RMID');
+							$this->db->order_by('id', 'desc');
+							$this->db->where('assignee', $id);
+							$query = $this->db->get('notification');
+
+							$notifi = $query->result();
+
+							foreach ($notifi as $notification) {
+						?>
 
 						<div class="col-12 col-md-6">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Card with button</h5>
+									<h5 class="card-title mb-0"><?php echo $notification->title; ?></h5>
 								</div>
 								<div class="card-body">
-									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
+									<p class="card-text"><?php echo $notification->message; ?></p>
+									<?php 
+										$link = $notification->link;
+										if (strlen($link) == 0){
+
+										}else{ 
+											echo "<a href='$notification->link' class='btn btn-primary'>Link</a>";
+										}
+									?>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-12 col-md-6">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Card with links</h5>
-								</div>
-								<div class="card-body">
-									<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">Animal Location</a>
-									<a href="#" class="card-link">Medical Center Locat</a>
-								</div>
-							</div>
-						</div>
+						<?php } ?>
+
+						
 					</div>
 
 				</div>
