@@ -37,6 +37,7 @@
 									<?php 
 
 									$where = "status=1 AND (assignee=$id OR assignee=0)";
+									$this->db->order_by('id', 'desc');
 									$this->db->where($where);
         							$query = $this->db->get('notification');
         							$new_notification = $query->result();
